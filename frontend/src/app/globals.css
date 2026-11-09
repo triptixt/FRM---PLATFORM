@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* PayYantra Brand Colors */
+  --brand-dark:    #0B2A5B;
+  --brand-blue:    #1E88E5;
+  --brand-light:   #4FA3F7;
+  --brand-tint:    #EAF3FF;
+
+  /* Backgrounds — light theme */
+  --bg:            #F5F7FA;
+  --bg2:           #FFFFFF;
+  --bg3:           #EAF3FF;
+  --bg4:           #F0F4FF;
+
+  /* Borders */
+  --border:        #DDE3EF;
+  --border2:       #C5D0E8;
+
+  /* Text */
+  --text:          #1A1A1A;
+  --text2:         #374151;
+  --text3:         #6B7280;
+  --text4:         #9CA3AF;
+
+  /* Semantic */
+  --green:         #16A34A;
+  --green-bg:      #F0FDF4;
+  --amber:         #D97706;
+  --amber-bg:      #FFFBEB;
+  --red:           #DC2626;
+  --red-bg:        #FEF2F2;
+  --blue:          #1E88E5;
+  --blue-bg:       #EAF3FF;
+
+  /* Typography */
+  --font:          'DM Sans', sans-serif;
+  --mono:          'DM Mono', monospace;
+
+  /* Layout */
+  --radius:        8px;
+  --radius2:       12px;
+  --sidebar-w:     200px;
+  --shadow-sm:     0 1px 3px rgba(11,42,91,0.08), 0 1px 2px rgba(11,42,91,0.04);
+  --shadow:        0 4px 16px rgba(11,42,91,0.10);
+  --shadow-lg:     0 8px 32px rgba(11,42,91,0.14);
+}
+
+html, body { height: 100%; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-light); }
+
+/* ── Badges ─────────────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 9px; border-radius: 20px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
+}
+.badge-allow     { background: var(--green-bg);  color: var(--green);  border: 1px solid #BBF7D0; }
+.badge-review    { background: var(--amber-bg);  color: var(--amber);  border: 1px solid #FDE68A; }
+.badge-block     { background: var(--red-bg);    color: var(--red);    border: 1px solid #FECACA; }
+.badge-open      { background: var(--blue-bg);   color: var(--blue);   border: 1px solid #BAD8FB; }
+.badge-closed    { background: #F9FAFB;          color: var(--text3);  border: 1px solid var(--border); }
+.badge-reviewing { background: var(--amber-bg);  color: var(--amber);  border: 1px solid #FDE68A; }
+.badge-active    { background: var(--green-bg);  color: var(--green);  border: 1px solid #BBF7D0; }
+.badge-inactive  { background: #F9FAFB;          color: var(--text3);  border: 1px solid var(--border); }
+.badge-blacklist { background: var(--red-bg);    color: var(--red);    border: 1px solid #FECACA; }
+.badge-watchlist { background: var(--amber-bg);  color: var(--amber);  border: 1px solid #FDE68A; }
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: var(--radius);
+  border: 1px solid var(--border2);
+  background: var(--bg2); color: var(--text2);
+  font-family: var(--font); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+.btn:hover:not(:disabled) { background: var(--bg3); border-color: var(--brand-light); color: var(--brand-dark); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-light));
+  border-color: var(--brand-blue); color: #fff;
+  box-shadow: 0 2px 8px rgba(30,136,229,0.3);
+}
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--brand-dark), var(--brand-blue));
+  border-color: var(--brand-dark);
+  box-shadow: 0 4px 12px rgba(30,136,229,0.4);
+}
+
+.btn-danger { background: var(--red-bg); border-color: #FECACA; color: var(--red); box-shadow: none; }
+.btn-danger:hover:not(:disabled) { background: #FEE2E2; }
+
+/* ── Inputs ─────────────────────────────────────────────── */
+input, select, textarea {
+  font-family: var(--font); font-size: 13px;
+  background: var(--bg2); border: 1px solid var(--border);
+  color: var(--text); border-radius: var(--radius);
+  padding: 8px 12px; outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(30,136,229,0.12);
+}
+input::placeholder, textarea::placeholder { color: var(--text4); }
+
+/* ── Cards ──────────────────────────────────────────────── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Tables ─────────────────────────────────────────────── */
+table { width: 100%; border-collapse: collapse; }
+th {
+  font-size: 11px; font-weight: 600; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 10px 16px; border-bottom: 1px solid var(--border);
+  text-align: left; background: #FAFBFE;
+}
+td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text2); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #FAFBFE; }
+
+/* ── Page sections ──────────────────────────────────────── */
+.page { padding: 32px; }
+.page-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 28px;
+}
+.page-title { font-size: 20px; font-weight: 600; color: var(--brand-dark); letter-spacing: -0.02em; }
+.page-sub   { color: var(--text3); font-size: 13px; margin-top: 3px; }
+
+/* ── Section label ──────────────────────────────────────── */
+.section-label {
+  font-size: 11px; font-weight: 600; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+}
+
+/* ── Animations ─────────────────────────────────────────── */
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.fade-in { animation: fadeIn 0.2s ease forwards; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+.pulse { animation: pulse 1.4s ease infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 0.8s linear infinite; }

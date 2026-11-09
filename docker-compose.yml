@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: frm-postgres
+    environment:
+      POSTGRES_DB: frm_db
+      POSTGRES_USER: frm_user
+      POSTGRES_PASSWORD: frm_pass123
+    ports:
+      - "5433:5432"
+    volumes:
+      - frm_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U frm_user -d frm_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: frm-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  frm_pg_data:
