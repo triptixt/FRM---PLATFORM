@@ -37,3 +37,8 @@ logs/
 Thumbs.db
 .vscode/
 .idea/
+
+
+.env
+**/.env
+
