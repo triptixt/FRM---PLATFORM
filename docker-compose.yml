@@ -30,5 +30,45 @@ services:
       timeout: 5s
       retries: 5
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: frm-backend
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: 8081
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: frm_user
+      DB_PASSWORD: frm_pass123
+      DB_NAME: frm_db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_KEY_PREFIX: "frm:"
+      REDIS_FAIL_OPEN: "true"
+      JWT_SECRET: frm-super-secret-jwt-key-change-this-in-production-2026
+      JWT_EXPIRY_MS: 86400000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frm-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      BACKEND_URL: http://backend:8081
+    depends_on:
+      - backend
+
 volumes:
   frm_pg_data:
